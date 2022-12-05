@@ -11,7 +11,7 @@ public class Day1{
       while(input.hasNextLine()){
         String line = input.nextLine();
         if(line.equals("")){
-          if (calCount > max){
+          if (calCount >= max){
             max = calCount;
           }
           calCount = 0;
@@ -34,11 +34,17 @@ public class Day1{
       int calCount = 0;
       while(input.hasNextLine()){
         String line = input.nextLine();
-        if(line.equals("")){
+        if(!line.equals("")){
+          calCount += Integer.parseInt(line);
+        }
+        else{
           if (calCount >= max1){
+            max3 = max2;
+            max2 = max1;
             max1 = calCount;
           }
           else if(calCount >= max2){
+            max3 = max2;
             max2 = calCount;
           }
           else if(calCount >= max3){
@@ -46,15 +52,8 @@ public class Day1{
           }
           calCount = 0;
         }
-        else{
-          calCount += Integer.parseInt(line);
-        }
       }
-      System.out.println(max1);
-      System.out.println(max2);
-      System.out.println(max3);
-      int sum = (72017 + 69359 + 66183);
-      System.out.println(sum);
+      System.out.println(max1+max2+max3);
       input.close();
     } catch (FileNotFoundException ex) {
       //File not found
