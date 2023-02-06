@@ -1,11 +1,8 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.util.*;
+import java.io.*;
 public class Day4{
-  public static void main(String[] args) {
-    try{
-      File file = new File("Day4.txt");
-      Scanner input = new Scanner(file);
+  public static void main(String[] args) throws Exception{
+      Scanner input = new Scanner(new File("Day4.txt"));
       int count = 0;
       while(input.hasNextLine()){
         String assignment = input.nextLine();
@@ -22,15 +19,13 @@ public class Day4{
       }
       System.out.println("Count : "+count);
 
-    }catch(FileNotFoundException e){
-      // File not found
-    }
-    try{
       File file = new File("Day4.txt");
-      Scanner input = new Scanner(file);
-      int count = 0;
-      while(input.hasNextLine()){
-        String assignment = input.nextLine();
+      Scanner input1 = new Scanner(new File("Day4.txt"));
+      int totalPairs = 0;
+      int overlapCount = 0;
+      while(input1.hasNextLine()){
+        totalPairs++;
+        String assignment = input1.nextLine();
         String[]pairs = assignment.split(",");
         String[]elf1 = pairs[0].split("-");
         String[]elf2 = pairs[1].split("-");
@@ -39,18 +34,12 @@ public class Day4{
         int elf2min = Integer.parseInt(elf2[0]);
         int elf2max = Integer.parseInt(elf2[1]);
         if(elf1min >= elf2min && elf1max <= elf2max){
-          count += elf1min - elf2min;
-          count += elf2max - elf1max;
+          overlapCount++;
         }
-        else if (elf2min >= elf1min && elf2max <= elf1max)){
-          count += elf2min - elf1min;
-          count += elf1max - elf2max;
+        else if (elf2min >= elf1min && elf2max <= elf1max){
+          overlapCount++;
         }
       }
-      System.out.println("Count : "+count);
-
-    }catch(FileNotFoundException e){
-      // File not found
-    }
+      System.out.println("Count : "+(totalPairs - count));
   }
 }
